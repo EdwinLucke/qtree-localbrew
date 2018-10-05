@@ -11,18 +11,31 @@ namespace qtree.core.website.Controllers
     [ApiController]
     public class MyFirstController : ControllerBase
     {
+        /// <summary>
+        /// Samenvatting
+        /// </summary>
+        /// <returns>200 | OK ; the data is returned in the data object</returns>
         // GET: api/MyFirst
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ObjectResult Get()
         {
-            return new string[] { "value1", "value2" };
+            // ApiResponse.
+            return Ok(ApiResponse.DataResponse(new string[] { "value1", "value2" }));
+            //return new string[] { "value1", "value2" };
         }
 
         // GET: api/MyFirst/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public ObjectResult Get(int id)
         {
-            return "value";
+            try
+            {
+                if (id == 2) throw new EntryPointNotFoundException();
+                return Ok(ApiResponse.DataResponse($"ID value={id}"));
+            }catch(Exception ex)
+            {
+                return Ok(ApiResponse.Error(ex, $"ID value={id}"));
+            }
         }
 
         // POST: api/MyFirst

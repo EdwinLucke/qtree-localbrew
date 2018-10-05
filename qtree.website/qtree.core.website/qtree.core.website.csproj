@@ -5,6 +5,11 @@
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\_git\qtree-website\qtree.website\qtree.core.website\qtree.core.website.xml</DocumentationFile>
+    <OutputPath>D:\_git\qtree-website\qtree.website\qtree.core.website\bin\Debug\netcoreapp2.2</OutputPath>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
