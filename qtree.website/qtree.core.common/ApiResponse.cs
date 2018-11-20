@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 
-namespace qtree.core.website
+namespace qtree.core.common
 {
     public interface IResponseApi<T>
     {
