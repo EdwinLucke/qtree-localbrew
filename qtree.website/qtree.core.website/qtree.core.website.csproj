@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-
     <TargetFramework>netcoreapp2.1</TargetFramework>
-
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
+    <UserSecretsId>024aa9cf-b6a6-48b6-9385-1937a2f5d021</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
