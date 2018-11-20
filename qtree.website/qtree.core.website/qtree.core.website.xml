@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>qtree.core.website</name>
+    </assembly>
+    <members>
+        <member name="M:qtree.core.website.Controllers.MyFirstController.Get">
+            <summary>
+            Samenvatting
+            </summary>
+            <returns>200 | OK ; the data is returned in the data object</returns>
+        </member>
+    </members>
+</doc>
