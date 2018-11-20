@@ -12,3 +12,4 @@ Possible technically targetted alements (projects):
 DevOps target (? Gitlab/Jenkins/TFS ?):
 - Build (retrieve from GIT & Build)
 - Deploy (release pipeline - Test environment (local) / Production environment (qtree.nl)
+- https://qtree.azurewebsites.net/swagger/index.html
