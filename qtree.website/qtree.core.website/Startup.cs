@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace qtree.core.website
@@ -67,6 +68,13 @@ namespace qtree.core.website
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+
+            ////add NLog to ASP.NET Core
+            //loggerFactory.AddProvider();
+
+            ////add NLog.Web
+            //app.AddNLogWeb();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

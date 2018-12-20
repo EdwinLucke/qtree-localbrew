@@ -7,10 +7,10 @@ using System.ComponentModel;
 namespace qtree.core.msunittest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest_PropertyDescriptor
     {
         [TestMethod]
-        public void TestMethod1()
+        public void UnitTest_PropertyDescriptor_test()
         {
             var dataObj = ApiResponse.DataResponse("test");
             foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(dataObj))

@@ -12,7 +12,7 @@ namespace qtree.core.common
         string Status { get; set; }
         string Code { get; set; }
         bool Error { get; set; }
-        T[] Data { get; }
+        T Data { get; }
     }
     public static class QtreeExtensions
     {
@@ -36,44 +36,33 @@ namespace qtree.core.common
         /// Data is always returned as an array (iEnumerable)
         /// </summary>
         [JsonProperty("data")]
-        public T[] Data
+        public T Data
         {
             get
             {
-                if (_data == null)
-                    return new T[0];
-
-                return (typeof(IEnumerable<T>).IsAssignableFrom(typeof(T)) ?
-                            _data as T[] :
-                            new T[] { _data });
-
+                return _data == null ? default(T) : _data;
             }
         }
         private T _data { get; set; }
         public string Result { get; internal set; }
 
-        public ResponseApi(HttpStatusCode pStatusCode = HttpStatusCode.OK, bool pError = false, object dataObject = null)
+        public ResponseApi(HttpStatusCode pStatusCode = HttpStatusCode.OK, bool pError = false, T dataObject = default(T))
         {
             Status = $"{pStatusCode}";
             Code = $"{(int)pStatusCode}";
             Error = pError;
-
-            try
-            {
-                if (dataObject != null)
-                {
-                    _data = (T)dataObject;
-                }
-            }
-            catch (MissingMethodException)
-            {
-                // do nothing the data object can be without any instanciated element
-            }
+            _data = dataObject;            
+        }
+        public ResponseApi(HttpStatusCode pStatusCode = HttpStatusCode.OK, bool pError = false)
+        {
+            Status = $"{pStatusCode}";
+            Code = $"{(int)pStatusCode}";
+            Error = pError;            
         }
     }
 
     /// <summary>
-    /// ResponseManager - Handle responses and transform them into  response format    
+    /// ResponseManager - Handle responses and transform them into response format    
     /// </summary>
     public static class ApiResponse
     {
@@ -95,9 +84,9 @@ namespace qtree.core.common
         /// <returns></returns>
         public static IResponseApi<T> Empty<T>(HttpStatusCode statusCode = HttpStatusCode.NotFound, string message = "no data")
         {
-            return new ResponseApi<T>(statusCode, isErrorResponse(statusCode), message);
+            return new ResponseApi<T>(statusCode, isErrorResponse(statusCode));
         }
-        public static IResponseApi<T> Empty<T>(string message)
+        public static IResponseApi<T> Empty<T>(string message = "no data")
         {
             return Empty<T>(HttpStatusCode.NotFound, message);
 
@@ -172,29 +161,7 @@ namespace qtree.core.common
     }
 
 
-    public class CustomDataContractResolver : DefaultContractResolver
-    {
-        public static readonly CustomDataContractResolver Instance = new CustomDataContractResolver();
 
-        public CustomDataContractResolver()
-        {
-
-        }
-
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-        {
-            var Tobject = ApiResponse.Empty<string>(HttpStatusCode.Accepted, "test");
-            var property = base.CreateProperty(member, memberSerialization);
-            if (property.DeclaringType == Tobject.GetType())
-            {
-                if (property.PropertyName.Equals("data", StringComparison.OrdinalIgnoreCase))
-                {
-                    property.PropertyName = Tobject.GetType().Name.ToLowerInvariant();
-                }
-            }
-            return property;
-        }
-    }
 
 }
 

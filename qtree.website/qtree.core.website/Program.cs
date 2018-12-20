@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace qtree.core.website
 {
@@ -14,11 +8,25 @@ namespace qtree.core.website
     {
         public static void Main(string[] args)
         {
+            LogManager.LoadConfiguration("NLog.config");
+            var log = LogManager.GetCurrentClassLogger();
+            log.Debug("Program - starting up debug");
+            log.Trace("Program Trace - starting up trace");
+            log.Error("Program - starting up error");
+            log.Fatal("Program - starting up fatal");
+            log.Info("Program - starting up info");
+
             CreateWebHostBuilder(args).Build().Run();
+            log.Debug("Program - shutting down");
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                //.ConfigureLogging((host, builder) =>
+                //{
+                //    host.HostingEnvironment.ConfigureNLog("nlog.config");
+                //    builder.SetMinimumLevel(LogLevel.Trace);
+                //})
                 .UseStartup<Startup>();
     }
 }
