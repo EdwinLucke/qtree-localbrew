@@ -18,6 +18,7 @@ namespace qtree.core.website
 
             CreateWebHostBuilder(args).Build().Run();
             log.Debug("Program - shutting down");
+            //https://github.com/NLog/NLog.Web/issues/234
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
