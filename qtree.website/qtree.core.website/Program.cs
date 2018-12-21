@@ -23,11 +23,11 @@ namespace qtree.core.website
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //.ConfigureLogging((host, builder) =>
-                //{
-                //    host.HostingEnvironment.ConfigureNLog("nlog.config");
-                //    builder.SetMinimumLevel(LogLevel.Trace);
-                //})
+                .ConfigureLogging(logging =>
+                {
+                    
+                    //logging.SetMinimumLevel(LogLevel.Trace);
+                })
                 .UseStartup<Startup>();
     }
 }
