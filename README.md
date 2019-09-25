@@ -1,4 +1,4 @@
-# qtree-website
+# qtree-localbrew 
 Home for the website for qtree.nl
 - have a base setup for the actual data
 - have a base setup for content
